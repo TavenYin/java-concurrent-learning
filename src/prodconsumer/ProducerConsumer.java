@@ -3,7 +3,7 @@ package prodconsumer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProducerConsumerTest {
+public class ProducerConsumer {
     public static void main(String[] args) {
         Buffer buffer = new Buffer();
         Producer p1 = new Producer(buffer, 1);
@@ -18,7 +18,7 @@ public class ProducerConsumerTest {
  */
 class Buffer {
     private List<Integer> data = new ArrayList<>();
-    private static final int MAX = 10;
+    private static final int MAX = 2;
     private static final int MIN = 0;
 
     public synchronized int get() {
@@ -60,12 +60,12 @@ class Consumer extends Thread {
             // 从缓冲区中获取数据
             value = buffer.get();
             try {
-                // 模拟消费数据
+                // 模拟消费数据所用时间
                 sleep(1000);
             } catch (InterruptedException e) {
             }
             System.out.println("消费者 #" + this.number + " got: " + value);
-        }
+    }
     }
 }
 
@@ -81,7 +81,7 @@ class Producer extends Thread {
     public void run() {
         for (int i = 0; i < 10; i++) {
             try {
-                // 模拟生产数据
+                // 模拟生产数据所用时间
                 sleep(500);
             } catch (InterruptedException e) {
             }
